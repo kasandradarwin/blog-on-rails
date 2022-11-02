@@ -11,24 +11,19 @@ Comment.destroy_all
 
 
 
-200.times do
+50.times do |index|
     created_at = Faker::Date.backward(days: 365 * 5)
 
     q = Post.create(
-        title: 
-        body: Faker::Hacker.say_something_smart,
-        view_count: rand(100_000),
+        title: Faker::Company.bs,
+        body: Faker::Lorem.sentence(word_count: 50, supplemental: true),
         created_at: created_at,
-        updated_at: created_at,
-        user: users.sample
+        updated_at: index.days.ago
     )
-    # if q.valid?
-    #     rand(1..5).times do
-    #         Answer.create(body: Faker::Hacker.say_something_smart, question: q, user: users.sample)
-    #     end
-    # end
+
 
 end
+
 
 posts = Post.all
 comments = Comment.all

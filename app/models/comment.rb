@@ -1,3 +1,5 @@
 class Comment < ApplicationRecord
-    belongs to :post
+    belongs_to :post
+    # validates :body, length: {minimum: 50, maximum: 200}
+
 end
