@@ -15,9 +15,19 @@
  */
 
 
- .index-each {
-    display: flex;
-    justify-content: space-between;
-  
-  
+ .summarycard {
+    margin: 0 auto;
 }
+
+
+
+.btn1 {
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    /*optional*/
+    font-family: arial, sans-serif;
+    /*input has OS specific font-family*/
+    color: #069;
+    cursor: pointer;
+  }

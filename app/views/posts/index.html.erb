@@ -1,23 +1,20 @@
 <p style="color: green"><%= notice %></p>
 
-<div id="posts">
-  <div class="row">
-    <div class="">
-      <% @posts.each do |post| %>
-        <div class ="container preview-cards">
-            <div class="card">
-              <div class="card-body">
-                <div>
-                  <h5 class="card-title"><%= link_to post.title, post %></h5>
-                   <p class="card-text"><%=  post.body %> </p>
-                </div>
-              </div>
-            </div>
-        </div>  
-        <% end %>  
-      </div> 
-    </div>
-  </div>
+<div class = "container summarycard">
+
+<div class= "row">
+
+  <% @posts.each do |post| %>
+    <div class="col-lg-4 col-md-6 col-12 card">
+        <h5><%= link_to post.title, post %></h5>
+        <p><%= truncate post.body, length: 40 %> </p>
+    </div> 
+    <% end %>  
+
+</div>
+</div>
+
+
 
 
 

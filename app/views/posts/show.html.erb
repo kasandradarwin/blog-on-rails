@@ -26,20 +26,22 @@
 
 <%= form_with(model:[@post, @comment]) do |f| %>
   <div>
-    <%= f.label :body %>
+   
     <br>
-    <%= f.text_area :body, cols: 50, rows: 5 %>
+    <%= f.text_area :body, cols: 50, rows: 3, placeholder: "Whats on your mind?" %>
   </div>
   <%= f.submit "Submit", class:"btn btn-outline-primary" %>
+  <br>
 <% end %>
 
+<br>
 <div id="comments">
   <% @comments.each do |comment| %>
     <%= comment.body %>
 
   <div class="d-flex flex-row">
       <div class="p-2"> <small>Commented <%= time_ago_in_words(comment.created_at)%> ago •</small></div>
-      <div class="p-2"> <small> <%= button_to "Delete", post_comment_path(@post.id, comment.id), method: :delete, class: 'btn btn-link' %> </small> </div>
+      <div class="p-2"> <%= button_to "Delete", post_comment_path(@post.id, comment.id), method: :delete, class: 'btn1' %></div>
   </div>
   </div>
   <% end %>
