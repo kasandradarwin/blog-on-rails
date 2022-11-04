@@ -1,18 +1,19 @@
 <p style="color: green"><%= notice %></p>
 
-<div class = "container summarycard">
 
-<div class= "row">
+   <div class = "container summarycard">
 
-  <% @posts.each do |post| %>
-    <div class="col-lg-4 col-md-6 col-12 card">
-        <h5><%= link_to post.title, post %></h5>
-        <p><%= truncate post.body, length: 40 %> </p>
-    </div> 
-    <% end %>  
-
-</div>
-</div>
+   <div class= "row d-flex justify-content-between">
+   
+     <% @posts.each do |post| %>
+       <div class="col-lg-4 col-md-6 col-12 card container-fluid d-flex p-2">
+           <h5><%= link_to post.title, post %></h5>
+           <p><%= truncate post.body, length: 40 %> </p>
+       </div> 
+       <% end %>  
+   
+   </div>
+   </div>
 
 
 
