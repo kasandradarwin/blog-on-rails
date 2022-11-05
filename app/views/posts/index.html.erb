@@ -1,0 +1,22 @@
+<p style="color: green"><%= notice %></p>
+
+
+<div class="container-fluid  ">
+  <div class="row row-cols-12 row-cols-md-6 row-cols-lg-4 justify-content-center">
+    <% @posts.each do |post| %>
+        
+            <div class="card m-1 p-2" style="width: 35rem;">
+                <%=link_to post.title, post_path(post.id)%>
+                <p class=""><%=post.body.truncate(50)%></p>
+            </div>
+        
+    <%end%>
+   </div> 
+</div>
+
+
+
+
+
+
+
