@@ -19,30 +19,29 @@ class CommentsController < ApplicationController
   #   @comment = Comment.new
   # end
 
-  # GET /comments/1/edit
-  # def edit
-  #   @post = Post.find(params[:post_id])
-  # end
 
   # POST /comments or /comments.json
   def create
+    # byebug
     @post = Post.find(params[:post_id])
     @comment = Comment.new(comment_params)
     @comment.post = @post
     # @comment = @post.comments.create(params[:comment]).permit(:name, :comment)
     
 
-    respond_to do |format|
+    # respond_to do |format|
       if @comment.save
-        format.html { redirect_to post_comment_path(@comment, @post), notice: "Comment was successfully created." }
+        redirect_to post_path(@post), notice: "Comment was successfully created." 
       else
-        format.html { render :new, status: :unprocessable_entity }
+        # byebug
+        # render :new, status: :unprocessable_entity 
+        redirect_to post_path(@post.id), notice: "That didn't work-- make sure your comment is at least 50 Characters" 
 
       end
     end
-  end
+  # end
 
-  # PATCH/PUT /comments/1 or /comments/1.json
+  # PATCH/PUT /comments/1 
   # def update
   #   respond_to do |format|
   #     if @comment.update(comment_params)
@@ -70,6 +69,6 @@ class CommentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def comment_params
-      params.require(:comment).permit(:body)
+      params.require(:comment).permit(:body )
     end
 end
