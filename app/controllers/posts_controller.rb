@@ -1,6 +1,9 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
+
   before_action :authenticate_user!, except: [:index, :show ]
+
+  before_action :authorize_user!, except: [:index, :show ]
 
   # GET /posts or /posts.json
   def index
@@ -73,4 +76,10 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:title, :body)
     end
+
+    private
+  
+    def authorize_user!
+      redirect_to root_path, alert: "Not Authorized!" unless can?(:crud, @post)
+    end  
 end

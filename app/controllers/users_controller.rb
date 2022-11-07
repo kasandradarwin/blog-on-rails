@@ -12,6 +12,27 @@ class UsersController < ApplicationController
         else
           render :new
         end
+      def index
+      end
+
+      def show
+          @user = User.find(params[:id])
+
+      end
+
+      
+        def update
+          if @user.update(user_params)
+            flash[:success] = "username/password successfully updated"
+            redirect_to @user
+
+          else
+            flash[:error] = "Something went wrong"
+            render :edit
+          end
+        end
+
+      
       end
     
       private
