@@ -35,11 +35,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_06_042151) do
     t.string "last_name"
     t.string "email"
     t.string "password_digest"
+    t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "comments", "posts"
   add_foreign_key "posts", "users"
+  add_foreign_key "comments", "users"
+  add_foreign_key "posts", "comments"
 end

@@ -38,5 +38,8 @@ class Ability
       user == post.user
     end
     
+    can :crud, Comment do |comment|
+      user == comment.user || comment.post.user
+    end
   end
 end

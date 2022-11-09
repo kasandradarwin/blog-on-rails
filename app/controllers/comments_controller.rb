@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, except: [:index, :show]
+   before_action :authorize_user!, only: [:destroy]
 
   # POST /comments 
   def create
@@ -20,10 +21,15 @@ class CommentsController < ApplicationController
 
   # DELETE /comments/1 
   def destroy
-    @comment.destroy
+    @comment = Comment.find params[id]
 
-    respond_to do |format|
-      format.html { redirect_to comments_url, notice: "Comment was successfully destroyed." }
+
+    if can?(:crud, @comment)
+      @comment.destroy
+      redirect_to post_path(@post.comment)
+      flash[:success] = "Answer deleted"
+    else
+      redirect_to root_path, alert: "Not Authorized to change answer!"
     end
   end
 
@@ -37,4 +43,8 @@ class CommentsController < ApplicationController
     def comment_params
       params.require(:comment).permit(:body )
     end
+
+    def authorize_user!
+      redirect_to root_path, alert: "Not Authorized!" unless can?(:crud, @comment)
+    end  
 end

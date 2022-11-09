@@ -8,22 +8,52 @@
 
 Post.destroy_all
 Comment.destroy_all
+User.destroy_all
 
+PASSWORD = "123"
 
+super_user = User.create(
+    first_name: "Admin",
+    last_name: "User",
+    email: "admin@user.com",
+    password: PASSWORD,
+    admin: true
+)
 
-50.times do |index|
+# p super_user
+
+10.times do
+    p "create users"
+    first_name = Faker::Name.first_name
+    last_name = Faker::Name.last_name
+
+    User.create(
+    first_name: first_name,
+    last_name: last_name,
+    email: "#{first_name}@#{last_name}.com",
+    password: PASSWORD,
+    admin: false
+    )
+end
+
+users = User.all
+
+50.times do 
     created_at = Faker::Date.backward(days: 365 * 5)
 
     q = Post.create(
-        title: Faker::Company.bs,
-        body: Faker::Lorem.sentence(word_count: 50, supplemental: true),
+        title: Faker::Lorem.sentence(word_count: 3),
+        body:Faker::Lorem.sentence(word_count: 100),
         created_at: created_at,
-        updated_at: index.days.ago
-    )
-
+        updated_at: created_at,
+        # updated_at: index.days.ago,
+        user: users.sample
+    )  
 
 end
 
 
 posts = Post.all
 comments = Comment.all
+
+p "end"
