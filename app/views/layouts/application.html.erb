@@ -12,6 +12,11 @@
 
   <body>
   <%= render 'welcome/header' %>
+  <% flash.each do |type, message| %>
+    <div class="alert alert-info" role=alert >
+      <%= message %>
+    </div>
+  <% end %>
     <%= yield %>
   </body>
 </html>

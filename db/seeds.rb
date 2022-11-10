@@ -17,7 +17,7 @@ super_user = User.create(
     last_name: "User",
     email: "admin@user.com",
     password: PASSWORD,
-    admin: true
+    admin?: true
 )
 
 # p super_user
@@ -32,7 +32,7 @@ super_user = User.create(
     last_name: last_name,
     email: "#{first_name}@#{last_name}.com",
     password: PASSWORD,
-    admin: false
+    admin?: false
     )
 end
 
@@ -42,18 +42,20 @@ users = User.all
     created_at = Faker::Date.backward(days: 365 * 5)
 
     q = Post.create(
-        title: Faker::Lorem.sentence(word_count: 3),
-        body:Faker::Lorem.sentence(word_count: 100),
+        title: Faker::Company.bs,
+        body: Faker::Lorem.paragraph(sentence_count: 6, supplemental: true),
         created_at: created_at,
         updated_at: created_at,
         # updated_at: index.days.ago,
         user: users.sample
     )  
-
+    
+puts q.errors.full_messages
 end
 
 
 posts = Post.all
 comments = Comment.all
 
+p posts.count
 p "end"

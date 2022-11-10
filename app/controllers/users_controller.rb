@@ -29,13 +29,15 @@ class UsersController < ApplicationController
       if @user.update(user_params)
         flash[:success] = "username/password successfully updated"
         redirect_to edit_user_path @user , notice: "Logged In!"
-      
-
       else
         flash[:error] = "Something went wrong"
         render :edit
       end
     end  
+
+    def changepassword
+
+    end
       
     
       private

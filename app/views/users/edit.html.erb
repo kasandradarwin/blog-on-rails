@@ -23,7 +23,11 @@
     <%= f.label :email %>
     <%= f.email_field :email %>
   </div>
-  <%= f.submit %>
+  <br>
+  <%= f.submit class:"btn btn-outline-primary"  %>
 <% end %>
 <br>
-<%= link_to "Change Password", "_changepassword" %>
+<%= link_to "Change Password", edit_user_path(current_user.id) %>
+
+<a href="./changepassword">Change Password</a>
+

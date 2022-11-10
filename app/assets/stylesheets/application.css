@@ -38,3 +38,7 @@
     color: #069;
     cursor: pointer;
   }
+
+  .nav-link, .navbar-brand{
+    color: #0275d8 !important;
+    }
