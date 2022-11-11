@@ -25,10 +25,11 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   def destroy
     @comment = Comment.find(params[:id])
+    @post = Post.find(params[:post_id])
 
     if can?(:crud, @comment)
       @comment.destroy
-      redirect_to post_path(@post.comment)
+      redirect_to post_path
       flash[:success] = 'Answer deleted'
     else
       redirect_to root_path, alert: 'Not Authorized to change answer!'

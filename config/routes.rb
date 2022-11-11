@@ -10,6 +10,15 @@ Rails.application.routes.draw do
   resource :user
   resource :session, only: [:new, :destroy, :create]
 
+    # edit
+  # get 'questions/:id/edit', to: 'questions#edit', as: :edit_question
+
+  # update
+  # patch 'questions/:id', to: 'questions#update'
+
+  get "user/:id/changepassword", to: 'users#change_password', as: :change_password
+  patch "user/:id/changepassword", to: 'users#change_password'
+
 
   resources :posts do
 

@@ -1,7 +1,6 @@
 <h1>Edit Your Profile</h1>
 
 
-
 <% if @user.errors.any? %>
   <ul>
     <% @user.errors.full_messages.each do |msg| %>
@@ -27,7 +26,5 @@
   <%= f.submit class:"btn btn-outline-primary"  %>
 <% end %>
 <br>
-<%= link_to "Change Password", edit_user_path(current_user.id) %>
-
-<a href="./changepassword">Change Password</a>
+<%= link_to "Change Password", change_password_path(@user.id) %>
 

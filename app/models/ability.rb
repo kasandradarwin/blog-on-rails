@@ -10,14 +10,16 @@ class Ability
       can :manage, :all
     end
 
-    alias_action :create, :read, :update, :delete, :to => :crud
+    alias_action :create, :read, :update, :delete, :destroy, :edit, :to => :crud
+
+
 
     can :crud, Post do |post|
       user == post.user
     end
     
     can :crud, Comment do |comment|
-      user == comment.user || comment.post.user
+      user == comment.user 
     end
   end
 end

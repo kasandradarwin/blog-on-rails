@@ -8,7 +8,7 @@ class UsersController < ApplicationController
       @user = User.new user_params
       if @user.save
         session[:user_id] = @user.id
-        redirect_to root_path, notice: "Logged In!"
+        redirect_to root_path
       else
         render :new
       end
@@ -20,7 +20,6 @@ class UsersController < ApplicationController
 
     def edit
       @user = current_user
-      puts @user
     end
     
     def update
@@ -28,14 +27,16 @@ class UsersController < ApplicationController
       
       if @user.update(user_params)
         flash[:success] = "username/password successfully updated"
-        redirect_to edit_user_path @user , notice: "Logged In!"
+        redirect_to edit_user_path @user
       else
         flash[:error] = "Something went wrong"
         render :edit
       end
     end  
-
-    def changepassword
+    
+    def change_password
+      @user = User.find(params[:id])
+  
 
     end
       
@@ -47,9 +48,14 @@ class UsersController < ApplicationController
         :first_name,
         :last_name,
         :email,
-        :password,
+        :id,
+        :password, 
         :password_confirmation
       )
     end
+
+    def password_params
+      params.permit(:id, :password, :password_confirmation)
+  end
 
 end
