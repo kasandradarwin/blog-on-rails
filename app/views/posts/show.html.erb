@@ -1,0 +1,61 @@
+<p style="color: green"><%= notice %></p>
+
+<h1><%= @post.title %><h1>
+
+<h6><%= @post.body %></h6>
+
+
+ <small>Posted <%= time_ago_in_words(@post.created_at)%> ago </small>
+<div class="d-flex flex-row">
+  
+<% if can? :crud, @post %>
+  <div class="p-2"><%= link_to("Edit", edit_post_path(@post), class:"btn btn-outline-primary")%></div>
+  <div class="p-2"> <%= button_to "Delete", @post, method: :delete, class:"btn btn-outline-primary" %> </div>
+<% end %>
+</div>
+  <br>
+
+<h3>Comment</h3>
+<% if @comment.errors.any? %>
+  <ul>
+    <% @comment.errors.full_messages.each do |msg| %>
+      <li> <%= msg %></li>
+    <% end %> 
+  </ul>
+<% end %>
+
+
+<%= form_with(model:[@post, @comment]) do |f| %>
+  <div>
+    <br>
+    <%= f.text_area :body, cols: 50, rows: 3, placeholder: "Whats on your mind?" %> 
+  </div>
+  <%= f.submit "Submit", class:"btn btn-outline-primary" %>
+  <br>
+<% end %>
+
+<br>
+<div id="comments">
+  <% @comments.each do |comment| %>
+    <%= comment.body %>
+    <div class="d-flex flex-row">
+    <div class="p-2"> <small>Commented <%= time_ago_in_words(comment.created_at)%> ago by <%= comment.user.first_name%></small></div>
+    <% if current_user == comment.user %>
+      <div class="p-2"> <%= button_to " • Delete", post_comment_path(@post.id, comment.id), method: :delete, class: 'btn1' %></div>
+    <% end %>
+    </div> 
+</div>
+ 
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
