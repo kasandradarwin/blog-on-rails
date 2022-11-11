@@ -39,9 +39,11 @@
   <% @comments.each do |comment| %>
     <%= comment.body %>
     <div class="d-flex flex-row">
-    <div class="p-2"> <small>Commented <%= time_ago_in_words(comment.created_at)%> ago by <%= comment.user.first_name%>•</small></div>
-    <div class="p-2"> <%= button_to "Delete", post_comment_path(@post.id, comment.id), method: :delete, class: 'btn1' %></div>
-</div>
+    <div class="p-2"> <small>Commented <%= time_ago_in_words(comment.created_at)%> ago by <%= comment.user.first_name%></small></div>
+    <% if current_user == comment.user %>
+      <div class="p-2"> <%= button_to " • Delete", post_comment_path(@post.id, comment.id), method: :delete, class: 'btn1' %></div>
+    <% end %>
+    </div> 
 </div>
  
 <% end %>
